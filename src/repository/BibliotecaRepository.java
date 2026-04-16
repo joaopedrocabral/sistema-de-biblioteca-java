@@ -8,15 +8,16 @@ public class BibliotecaRepository {
     private ArrayList<Livro> livros;
     private ArrayList<Usuario> usuarios;
 
-    private int proximoId = 1;
+    private int proximoIdLivro = 1;
+    private int proximoIdUsuario = 1;
 
     public BibliotecaRepository(){
         livros = new ArrayList<>();
         usuarios = new ArrayList<>();
     }
 
-    public int gerarProximoId(){
-        return proximoId++;
+    public int gerarProximoIdLivro(){
+        return proximoIdLivro++;
     }
 
     public void validarLivroNulo(Livro livro){
@@ -34,14 +35,39 @@ public class BibliotecaRepository {
         return new ArrayList<>(livros);
     }
 
-    public Livro buscarLivroPorId(int id){
+    public Livro buscarLivroPorId(int idLivro){
 
         for (Livro livro : livros) {
 
-            if (livro.getId() == id) {
+            if (livro.getId() == idLivro) {
                 return livro;
             }
         }
         return null;
     }
+
+    public int gerarProximoIdUsuario(){
+        return proximoIdUsuario++;
+    }
+
+    public void adicionarUsuario(Usuario usuario){
+        if(usuario == null){
+            throw new IllegalArgumentException("Usuário Inválido");
+        }
+        usuarios.add(usuario);
+    }
+
+    public ArrayList<Usuario> listarUsuarios(){
+        return new ArrayList<>(usuarios);
+    }
+
+    public Usuario buscarUsuarioPorId(int idUsuario){
+        for(Usuario usuario : usuarios){
+            if(usuario.getId() == idUsuario){
+                return usuario;
+            }
+        }
+        return null;
+    }
 }
+

@@ -6,6 +6,7 @@ public class Livro {
     private String autor;
     private int anoPublicacao;
     private boolean disponivel;
+    private Usuario usuarioEmprestado;
 
     public Livro(int id, String titulo, String autor, int anoPublicacao){
         this.id = id;
@@ -27,12 +28,14 @@ public class Livro {
         this.anoPublicacao = anoPublicacao;
     }
 
-    public void emprestar(){
+    public void emprestar(Usuario usuario){
         this.disponivel = false;
+        this.usuarioEmprestado = usuario;
     }
 
     public void devolver(){
         this.disponivel = true;
+        this.usuarioEmprestado = null;
     }
 
     public int getId(){
@@ -55,14 +58,19 @@ public class Livro {
         return disponivel;
     }
 
+    public Usuario getUsuarioEmprestado(){
+        return usuarioEmprestado;
+    }
+
     @Override
     public String toString(){
         return "ID: " + id + " | " +
                 "Título: " + titulo + " | " +
                 "Autor: " + autor + " | " +
                 "Ano: " + anoPublicacao + " | " +
-                "Disponível: " + (disponivel? "Sim" : "Não");
-
+                (disponivel?
+                        "Disponível: Sim" :
+                        "Emprestado para: " +  usuarioEmprestado.getNome());
     }
 }
 
