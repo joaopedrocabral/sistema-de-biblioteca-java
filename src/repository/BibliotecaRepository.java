@@ -50,10 +50,14 @@ public class BibliotecaRepository {
         return proximoIdUsuario++;
     }
 
-    public void adicionarUsuario(Usuario usuario){
+    public void validarUsuarioNulo(Usuario usuario){
         if(usuario == null){
-            throw new IllegalArgumentException("Usuário Inválido");
+            throw new IllegalArgumentException("ERRO! Usuário Inválido!");
         }
+    }
+
+    public void adicionarUsuario(Usuario usuario){
+        validarUsuarioNulo(usuario);
         usuarios.add(usuario);
     }
 

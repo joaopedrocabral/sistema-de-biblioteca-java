@@ -5,7 +5,6 @@ public class Usuario {
     private String nome;
 
     private void validarNome(String nome){
-
         if(nome == null || nome.trim().isEmpty()){
             throw new IllegalArgumentException("ERRO! Nome não pode ser nulo ou vazio.");
         }

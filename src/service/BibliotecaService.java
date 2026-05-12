@@ -23,12 +23,20 @@ public class BibliotecaService {
         return repository.listarLivros();
     }
 
+    public boolean existeLivros(){
+        return !listarLivros().isEmpty();
+    }
+
     public void emprestarLivro(int idLivro, int idUsuario){
         Livro livro = repository.buscarLivroPorId(idLivro);
         Usuario usuario = repository.buscarUsuarioPorId(idUsuario);
 
         if(livro == null){
             throw new IllegalArgumentException("ERRO! Não existe livro com esse ID");
+        }
+
+        if(usuario == null){
+            throw new IllegalArgumentException("ERRO! Não existe usuário com esse ID");
         }
 
         if(!livro.isDisponivel()){
@@ -53,15 +61,18 @@ public class BibliotecaService {
     }
 
     public void cadastrarUsuario(String nome){
-        int id = repository.gerarProximoIdUsuario();
 
-        Usuario usuario = new Usuario(id, nome);
+        Usuario usuario = new Usuario(repository.gerarProximoIdUsuario(), nome);
 
         repository.adicionarUsuario(usuario);
     }
 
     public ArrayList<Usuario> listarUsuarios(){
          return repository.listarUsuarios();
+    }
+
+    public boolean existeUsuarios(){
+        return !repository.listarUsuarios().isEmpty();
     }
 
     public Usuario buscarUsuarioPorId(int id){

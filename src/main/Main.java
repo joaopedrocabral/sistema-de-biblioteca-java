@@ -77,7 +77,7 @@ public class Main {
                 }
 
                 case 2: {
-                    if (service.listarLivros().isEmpty()) {
+                    if (!service.existeLivros()) {
                         System.out.println("A lista de livros está vazia");
                         break;
                     }
@@ -88,7 +88,7 @@ public class Main {
 
                 case 3: {
 
-                    if(service.listarLivros().isEmpty() || service.listarUsuarios().isEmpty()){
+                    if(!service.existeLivros() || !service.existeUsuarios()){
                         System.out.println("É necessário ter livros e usuários cadastrados.");
                         break;
                     }
@@ -110,6 +110,7 @@ public class Main {
                     try {
                         service.emprestarLivro(idLivro, idUsuario);
                         System.out.println("Livro emprestado com sucesso!");
+
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
                     }
@@ -119,7 +120,7 @@ public class Main {
                 }
 
                 case 4: {
-                    if (service.listarLivros().isEmpty()) {
+                    if (!service.existeLivros()) {
                         System.out.println("A lista de livros está vazia");
                         break;
                     }
@@ -174,7 +175,7 @@ public class Main {
                             }
 
                             case 2: {
-                                if(service.listarUsuarios().isEmpty()){
+                                if(!service.existeUsuarios()){
                                     System.out.println("A lista de usuários está vazia!");
                                     break;
                                 }
